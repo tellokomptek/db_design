@@ -36,9 +36,9 @@ export default function AdminLayout({ children, user = { name: 'Admin', role: 'A
       groupTitle: 'MASTER DATA',
       items: [
         // badge menggunakan state pendingCount jika id-nya 'orders'
-          {  id: 'bahan',  label: 'Bahan Cetak',  icon: '📑',  path: '/orders',  badge: pendingCount > 0 ? pendingCount : null},
-          {  id: 'gramasi',  label: 'Ukuran Kertas',  icon: '📏',  path: '/services'},
-          {  id: 'product',  label: 'Produk',  icon: '📦',  path: '/products'},
+        {id: 'bahan',label: 'Bahan Cetak', icon: '🗞️',path: '/bahan'},
+        {id: 'gramasi',label: 'Ukuran Kertas',icon: '📐',path: '/ukuran'},
+        {  id: 'product',  label: 'Produk',  icon: '📦',  path: '/products'},
       ]
     },
     {
@@ -47,7 +47,7 @@ export default function AdminLayout({ children, user = { name: 'Admin', role: 'A
         // badge menggunakan state pendingCount jika id-nya 'orders'
         { id: 'orders', label: 'Pesanan Cetak', icon: '📄', path: '/orders', badge: pendingCount > 0 ? pendingCount : null },
         // { id: 'services', label: 'Layanan & Price', icon: '🖨️', path: '/services' },
-        { id: 'papers', label: 'Stok Kertas / Bahan', icon: '📦', path: '/papers' },
+        { id: 'kertas', label: 'Stok Kertas / Bahan', icon: '📑', path: '/kertas' },
         { id: 'payments', label: 'Pembayaran', icon: '💳', path: '/payments' },
       ]
     },

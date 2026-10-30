@@ -20,6 +20,9 @@ import Products from './pages/client/Products';
 import ProductInput from './pages/admin/ProductInput';
 import ProductList from './pages/admin/ProductList.jsx';
 import ProductEdit from './pages/admin/ProductEdit';
+import BahanList from './pages/admin/BahanList.jsx';
+import BahanInput from './pages/admin/bahan/BahanInput';
+import BahanEdit from './pages/admin/bahan/BahanEdit';
 
 // Proteksi halaman berdasarkan login dan role
 function ProtectedRoute({ children, role }) {
@@ -68,8 +71,33 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/bahan"
+          element={
+            <ProtectedRoute role="admin">
+              <BahanList />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route 
+        <Route
+          path="/bahan/create"
+          element={
+            <ProtectedRoute role="admin">
+              <BahanInput />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/bahan/edit/:id"
+          element={
+            <ProtectedRoute role="admin">
+              <BahanEdit />
+            </ProtectedRoute>
+          }
+        />
+
           path="/products/create" 
           element={
             <ProtectedRoute role="admin">

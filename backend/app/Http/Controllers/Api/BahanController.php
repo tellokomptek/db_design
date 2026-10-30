@@ -3,12 +3,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 class BahanController extends Controller
 {
     // GET: Menampilkan semua bahan
     public function index()
     {
-        $bahan = DB::table('db_design.bahan')
+        $bahan = DB::table('bahan')
             ->select('ID', 'Nama', 'ket', 'Harga', 'aktif')
             ->orderBy('Nama')
             ->get();
@@ -22,7 +23,7 @@ class BahanController extends Controller
     // GET: Menampilkan satu bahan berdasarkan ID
     public function show($id)
     {
-        $bahan = DB::table('db_design.bahan')
+        $bahan = DB::table('bahan')
             ->select('ID', 'Nama', 'ket', 'Harga', 'aktif')
             ->where('ID', $id)
             ->first();
@@ -50,14 +51,14 @@ class BahanController extends Controller
             'aktif' => ['required', 'boolean'],
         ]);
 
-        $id = DB::table('db_design.bahan')->insertGetId([
+        $id = DB::table('bahan')->insertGetId([
             'Nama'  => $validated['Nama'],
             'ket'   => $validated['ket'] ?? null,
             'Harga' => $validated['Harga'],
             'aktif' => $validated['aktif'],
         ], 'ID');
 
-        $bahan = DB::table('db_design.bahan')
+        $bahan = DB::table('bahan')
             ->select('ID', 'Nama', 'ket', 'Harga', 'aktif')
             ->where('ID', $id)
             ->first();
@@ -72,7 +73,7 @@ class BahanController extends Controller
     // PUT/PATCH: Memperbarui bahan
     public function update(Request $request, $id)
     {
-        $exists = DB::table('db_design.bahan')
+        $exists = DB::table('bahan')
             ->where('ID', $id)
             ->exists();
 
@@ -90,7 +91,7 @@ class BahanController extends Controller
             'aktif' => ['required', 'boolean'],
         ]);
 
-        DB::table('db_design.bahan')
+        DB::table('bahan')
             ->where('ID', $id)
             ->update([
                 'Nama'  => $validated['Nama'],
@@ -99,7 +100,7 @@ class BahanController extends Controller
                 'aktif' => $validated['aktif'],
             ]);
 
-        $bahan = DB::table('db_design.bahan')
+        $bahan = DB::table('bahan')
             ->select('ID', 'Nama', 'ket', 'Harga', 'aktif')
             ->where('ID', $id)
             ->first();
@@ -114,7 +115,7 @@ class BahanController extends Controller
     // DELETE: Menghapus bahan
     public function destroy($id)
     {
-        $deleted = DB::table('db_design.bahan')
+        $deleted = DB::table('bahan')
             ->where('ID', $id)
             ->delete();
 
