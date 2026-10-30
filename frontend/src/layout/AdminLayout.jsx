@@ -33,11 +33,20 @@ export default function AdminLayout({ children, user = { name: 'Admin', role: 'A
       ]
     },
     {
+      groupTitle: 'MASTER DATA',
+      items: [
+        // badge menggunakan state pendingCount jika id-nya 'orders'
+          {  id: 'bahan',  label: 'Bahan Cetak',  icon: '📑',  path: '/orders',  badge: pendingCount > 0 ? pendingCount : null},
+          {  id: 'gramasi',  label: 'Ukuran Kertas',  icon: '📏',  path: '/services'},
+          {  id: 'product',  label: 'Produk',  icon: '📦',  path: '/products'},
+      ]
+    },
+    {
       groupTitle: 'OPERASIONAL',
       items: [
         // badge menggunakan state pendingCount jika id-nya 'orders'
         { id: 'orders', label: 'Pesanan Cetak', icon: '📄', path: '/orders', badge: pendingCount > 0 ? pendingCount : null },
-        { id: 'services', label: 'Layanan & Price', icon: '🖨️', path: '/services' },
+        // { id: 'services', label: 'Layanan & Price', icon: '🖨️', path: '/services' },
         { id: 'papers', label: 'Stok Kertas / Bahan', icon: '📦', path: '/papers' },
         { id: 'payments', label: 'Pembayaran', icon: '💳', path: '/payments' },
       ]
@@ -115,7 +124,9 @@ export default function AdminLayout({ children, user = { name: 'Admin', role: 'A
 
                 <div className="nav nav-pills flex-column gap-1">
                   {group.items.map((item) => {
-                    const isActive = currentPath === item.path;
+                    const isActive =
+                                currentPath === item.path ||
+                                (item.path !== '/' && currentPath.startsWith(item.path + '/'));
                     return (
                       <Link 
                         key={item.id}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '../layout/AdminLayout';
-import API from '../api/axios';
+import AdminLayout from '../../layout/AdminLayout';
+import API from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
 
 

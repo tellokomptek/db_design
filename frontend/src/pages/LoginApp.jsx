@@ -18,8 +18,15 @@ export default function Login() {
         password
       });
       
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/dashboard');
+    const user = response.data.user;
+      localStorage.setItem('user', JSON.stringify(user));
+
+      if (user.role === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/');
+      }
+
     } catch (err) {
       setError(err.response?.data?.message || 'Terjadi kesalahan pada server');
     }

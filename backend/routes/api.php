@@ -5,6 +5,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\OrderController; 
 use App\Http\Controllers\Api\PelangganController;
+use App\Http\Controllers\Api\BahanController;
+use App\Http\Controllers\Api\UkuranController;
+use App\Http\Controllers\Api\ProductController;
 
 Route::get('/test-koneksi', function () {
     try {
@@ -30,3 +33,18 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 Route::get('/pelanggan', [PelangganController::class, 'index']);
+Route::get('/bahan', [BahanController::class, 'index']);
+Route::get('/bahan/{id}', [BahanController::class, 'show']);
+Route::post('/bahan', [BahanController::class, 'store']);
+Route::put('/bahan/{id}', [BahanController::class, 'update']);
+Route::delete('/bahan/{id}', [BahanController::class, 'destroy']);
+Route::get('/ukuran', [UkuranController::class, 'index']);
+Route::get('/ukuran/{id}', [UkuranController::class, 'show']);
+Route::post('/ukuran', [UkuranController::class, 'store']);
+Route::put('/ukuran/{id}', [UkuranController::class, 'update']);
+Route::delete('/ukuran/{id}', [UkuranController::class, 'destroy']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::post('/products', [ProductController::class, 'store']);
+Route::put('/products/{id}', [ProductController::class, 'update']);
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);

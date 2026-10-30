@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '../layout/AdminLayout'; // Sesuaikan path layout Anda
-import API from '../api/axios';
+import AdminLayout from '../../layout/AdminLayout'; // Sesuaikan path layout Anda
+import API from '../../api/axios';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
