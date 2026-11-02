@@ -13,6 +13,17 @@ function BahanList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const STORAGE_URL = 'http://192.168.0.52:8001/storage';
+
+  const handleLogout = () => {
+  // 1. Hapus data sesi login dari localStorage
+  localStorage.removeItem('user');
+  
+  // 2. Arahkan ke halaman login dengan opsi replace: true
+  // 'replace: true' berfungsi menimpa history browser sehingga tombol back tidak bisa kembali ke dashboard
+  navigate('/', { replace: true });
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -45,6 +56,13 @@ function BahanList() {
       )
   );
 
+    // URL foto produk
+  const getPhotoUrl = (photo) => {
+    if (!photo) return null;
+
+    return `${STORAGE_URL}/uploads/${photo}`;
+  };
+
   const formatHarga = (harga) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -54,7 +72,7 @@ function BahanList() {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout onLogout={handleLogout}>
       <div className="product-list-page">
 
         <div className="product-list-header">
@@ -71,13 +89,23 @@ function BahanList() {
           </button>
         </div>
 
+        {/* Pencarian */}
         <div className="product-list-toolbar">
           <input
             type="text"
-            placeholder="Cari nama bahan..."
+            className="form-control"
+            placeholder="Cari Nama atau Keterangan Bahan..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+
+          <button
+            className="btn btn-outline-secondary"
+            onClick={loadData}
+            disabled={loading}
+          >
+            Refresh
+          </button>
         </div>
 
         {error && (
@@ -95,6 +123,7 @@ function BahanList() {
                 <thead>
                   <tr>
                     <th>No.</th>
+                    <th>Foto</th>
                     <th>Nama Bahan</th>
                     <th>Keterangan</th>
                     <th>Harga</th>
@@ -108,6 +137,25 @@ function BahanList() {
                     filteredData.map((item, index) => (
                       <tr key={item.ID}>
                         <td>{index + 1}</td>
+
+                    <td>
+                      {item.photo ? (
+                        <img
+                          src={getPhotoUrl(item.photo)}
+                          alt={item.nama}
+                          className="product-list-photo"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className="product-no-photo">
+                          No Image
+                        </div>
+                      )}
+                    </td>
+                        
+                        
                         <td><strong>{item.Nama}</strong></td>
                         <td>{item.ket || '-'}</td>
                         <td>{formatHarga(item.Harga)}</td>

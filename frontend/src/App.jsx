@@ -17,12 +17,16 @@ import Pelanggan from './pages/admin/Pelanggan';
 import ClientLayout from './layout/ClientLayout';
 import Home from './pages/client/Home';
 import Products from './pages/client/Products';
-import ProductInput from './pages/admin/ProductInput';
+import ProductInput from './pages/admin/ProductInput.jsx';
 import ProductList from './pages/admin/ProductList.jsx';
 import ProductEdit from './pages/admin/ProductEdit';
 import BahanList from './pages/admin/BahanList.jsx';
-import BahanInput from './pages/admin/bahan/BahanInput';
-import BahanEdit from './pages/admin/bahan/BahanEdit';
+import BahanInput from './pages/admin/BahanInput';
+import BahanEdit from './pages/admin/BahanEdit';
+import UkuranList from './pages/admin/UkuranList.jsx';
+import UkuranEdit from './pages/admin/UkuranEdit.jsx';
+import UkuranInput from './pages/admin/UkuranInput.jsx';
+
 
 // Proteksi halaman berdasarkan login dan role
 function ProtectedRoute({ children, role }) {
@@ -98,6 +102,34 @@ function App() {
           }
         />
 
+        <Route
+          path="/ukuran"
+          element={
+            <ProtectedRoute role="admin">
+              <UkuranList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+        path='/ukuran/edit/:id'
+        element={
+          <ProtectedRoute role="admin">
+            <UkuranEdit />
+          </ProtectedRoute>
+        }
+        />
+
+        <Route
+          path="/ukuran/create"
+          element={
+            <ProtectedRoute role="admin">
+              <UkuranInput />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/products/create" 
           element={
             <ProtectedRoute role="admin">

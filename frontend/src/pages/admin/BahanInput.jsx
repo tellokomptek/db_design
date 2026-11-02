@@ -19,6 +19,9 @@ function BahanInput() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
+   // URL penyimpanan foto bahan
+  const imageBaseUrl = 'http://192.168.0.52:8001/storage/uploads/';
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -26,6 +29,15 @@ function BahanInput() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleLogout = () => {
+  // 1. Hapus data sesi login dari localStorage
+  localStorage.removeItem('user');
+  
+  // 2. Arahkan ke halaman login dengan opsi replace: true
+  // 'replace: true' berfungsi menimpa history browser sehingga tombol back tidak bisa kembali ke dashboard
+  navigate('/', { replace: true });
   };
 
   const handleSubmit = async (e) => {
@@ -71,7 +83,7 @@ function BahanInput() {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout onLogout={handleLogout}>
       <div className="product-form-page">
 
         <div className="product-form-header">

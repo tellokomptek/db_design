@@ -38,7 +38,7 @@ export default function AdminLayout({ children, user = { name: 'Admin', role: 'A
         // badge menggunakan state pendingCount jika id-nya 'orders'
         {id: 'bahan',label: 'Bahan Cetak', icon: '🗞️',path: '/bahan'},
         {id: 'gramasi',label: 'Ukuran Kertas',icon: '📐',path: '/ukuran'},
-        {  id: 'product',  label: 'Produk',  icon: '📦',  path: '/products'},
+        {id: 'product',  label: 'Produk',  icon: '📦',  path: '/products'},
       ]
     },
     {

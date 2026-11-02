@@ -19,6 +19,15 @@ export default function ProductList() {
 
   const STORAGE_URL = 'http://192.168.0.52:8001/storage';
 
+  const handleLogout = () => {
+  // 1. Hapus data sesi login dari localStorage
+  localStorage.removeItem('user');
+  
+  // 2. Arahkan ke halaman login dengan opsi replace: true
+  // 'replace: true' berfungsi menimpa history browser sehingga tombol back tidak bisa kembali ke dashboard
+  navigate('/', { replace: true });
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -125,7 +134,7 @@ export default function ProductList() {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout onLogout={handleLogout}>
 
       <div className="product-list-page">
 
@@ -205,7 +214,6 @@ export default function ProductList() {
                   <tr key={item.ID}>
 
                     <td>{index + 1}</td>
-
                     <td>
                       {item.photo ? (
                         <img

@@ -28,6 +28,15 @@ function ProductEdit() {
   const [error, setError] = useState('');
 
   const imageBaseUrl = 'http://192.168.0.52:8001/storage/uploads/';
+  
+  const handleLogout = () => {
+  // 1. Hapus data sesi login dari localStorage
+  localStorage.removeItem('user');
+  
+  // 2. Arahkan ke halaman login dengan opsi replace: true
+  // 'replace: true' berfungsi menimpa history browser sehingga tombol back tidak bisa kembali ke dashboard
+  navigate('/', { replace: true });
+  };
 
   useEffect(() => {
     loadData();
@@ -214,7 +223,7 @@ const loadData = async () => {
 }, [form]);
 
   return (
-    <AdminLayout>
+    <AdminLayout onLogout={handleLogout}>
       <div className="product-form-page">
 
         <div className="product-form-header">

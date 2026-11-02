@@ -12,6 +12,8 @@ export default function ProductForm() {
   const [bahanList, setBahanList] = useState([]);
   const [ukuranList, setUkuranList] = useState([]);
 
+  const navigate = useNavigate();
+
   const [loadingMaster, setLoadingMaster] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
@@ -29,6 +31,16 @@ export default function ProductForm() {
     ukuran_kertas: '',
     aktif: 1,
   });
+
+  const handleLogout = () => {
+  // 1. Hapus data sesi login dari localStorage
+  localStorage.removeItem('user');
+  
+  // 2. Arahkan ke halaman login dengan opsi replace: true
+  // 'replace: true' berfungsi menimpa history browser sehingga tombol back tidak bisa kembali ke dashboard
+  navigate('/', { replace: true });
+  };
+
 
   // Mengambil data bahan dan ukuran dari Laravel
   useEffect(() => {
@@ -163,7 +175,7 @@ export default function ProductForm() {
 };
 
    return (
-    <AdminLayout>
+    <AdminLayout onLogout={handleLogout}>
       <div className="product-form-page">
 
       <div className="product-form-header">
@@ -308,6 +320,15 @@ export default function ProductForm() {
           </div>
 
           <div className="form-actions full-width">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => navigate('/products')}
+              disabled={saving}
+            >
+              Batal
+            </button>
+
             <button type="submit" disabled={saving}>
               {saving ? 'Menyimpan...' : 'Simpan Produk'}
             </button>
